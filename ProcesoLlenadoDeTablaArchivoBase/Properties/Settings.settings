@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ProcesoGeneracionContabilidad.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ARCHIVO_CONFIGURACION" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cfgParamPGC.config</Value>
+    </Setting>
+    <Setting Name="RUTA_CONFIG" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\AutosystV2</Value>
+    </Setting>
+    <Setting Name="CARPETA_LOGS_EXCEP" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\LOGS\LOGS_EXCEP</Value>
+    </Setting>
+    <Setting Name="ProcesoGeneracionContabilidad_WR_Contabilidad_Contabilidad" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://10.5.2.160/ws_admincontabilidad/Contabilidad.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

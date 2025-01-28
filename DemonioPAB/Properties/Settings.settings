@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DemonioPAB.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Puerto" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">8103</Value>
+    </Setting>
+    <Setting Name="RUTA_CONFIG" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:\AutosystV2</Value>
+    </Setting>
+    <Setting Name="ARCHIVO_CONFIGURACION" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cfgParamPGC.config</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

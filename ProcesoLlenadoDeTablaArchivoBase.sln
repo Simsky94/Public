@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcesoLlenadoDeTablaArchivoBase", "ProcesoLlenadoDeTablaArchivoBase\ProcesoLlenadoDeTablaArchivoBase.csproj", "{735185BB-5E1C-4665-811E-7E16C959A25F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemonioPAB", "DemonioPAB\DemonioPAB.csproj", "{480E5727-A809-4C48-A592-7BC22BFBF45E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{735185BB-5E1C-4665-811E-7E16C959A25F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{735185BB-5E1C-4665-811E-7E16C959A25F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{735185BB-5E1C-4665-811E-7E16C959A25F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{735185BB-5E1C-4665-811E-7E16C959A25F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{480E5727-A809-4C48-A592-7BC22BFBF45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{480E5727-A809-4C48-A592-7BC22BFBF45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{480E5727-A809-4C48-A592-7BC22BFBF45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{480E5727-A809-4C48-A592-7BC22BFBF45E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://10.5.2.110:8080/tfs/finanzas
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ProcesoLlenadoDeTablaArchivoBase\\ProcesoLlenadoDeTablaArchivoBase.csproj
+		SccProjectName1 = ProcesoLlenadoDeTablaArchivoBase
+		SccLocalPath1 = ProcesoLlenadoDeTablaArchivoBase
+		SccProjectUniqueName2 = DemonioPAB\\DemonioPAB.csproj
+		SccProjectName2 = DemonioPAB
+		SccLocalPath2 = DemonioPAB
+	EndGlobalSection
+EndGlobal
