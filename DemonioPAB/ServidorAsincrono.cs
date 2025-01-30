@@ -6,9 +6,6 @@ using System.Threading;
 using System.Net;
 using System.Net.Sockets;
 
-/************************************************************************/
-/* Autor: J. Antonio Barrera F.											*/
-/************************************************************************/
 namespace DemonioPAB
 {
     public class ServidorAsincrono
@@ -20,7 +17,7 @@ namespace DemonioPAB
         private TcpListener listener;
         private Thread listenerThread;
         DVADB.DB2 dbCnx;
-
+        private CancellationTokenSource cts = new CancellationTokenSource();
         //public Boolean escribeLOG;
 
         public ServidorAsincrono(int PuertoEscuchar, long TiempoAbortar, ref DVADB.DB2 _dbCnx)
@@ -41,6 +38,12 @@ namespace DemonioPAB
             if (Ejecutor.escribeLOG)
                 Ejecutor.m_log.AgregaRegistro("ServidorAsincrono.Iniciar()");
 
+            if (listenerThread != null && listenerThread.IsAlive)
+            {
+                Ejecutor.m_log.AgregaRegistro("El servidor ya está en ejecución.");
+                return; // Evita iniciar múltiples veces
+            }
+
             listenerThread = new Thread(new ThreadStart(DoListen));
             listenerThread.Start();
         }
@@ -50,30 +53,30 @@ namespace DemonioPAB
             if (Ejecutor.escribeLOG)
                 Ejecutor.m_log.AgregaRegistro("ServidorAsincrono.DoListen()");
 
-            //try
-            //{
-            //JASG
-            //IPAddress direc = IPAddress.Parse("10.1.4.92");            
-            //listener = new TcpListener(direc, puerto);
             listener = new TcpListener(System.Net.IPAddress.Any, puerto);
-            listener.Start();                
 
-                do
+            // Habilita SO_REUSEADDR para evitar el error de puerto en uso
+            listener.Server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
+
+            listener.Start();
+
+            try
+            {
+                while (!cts.Token.IsCancellationRequested)
                 {
-                    UserConnection client = new UserConnection(listener.AcceptTcpClient(), 2000, ref dbCnx);
-                    //client.m_log = m_log;
-                    client.LineReceived += new LineReceive(OnLineReceived);
-                } 
-                while (true);
-            //}
-            //catch(Exception ex)
-            //{
-            //    m_log.AgregaRegistro("Message: " + ex.Message);
-            //    m_log.AgregaRegistro("InnerException: " + ex.InnerException);
-            //    m_log.AgregaRegistro("StackTrace: " + ex.StackTrace);
+                    if (listener.Pending()) // Evita bloqueos en AcceptTcpClient
+                    {
+                        UserConnection client = new UserConnection(listener.AcceptTcpClient(), 2000, ref dbCnx);
+                        client.LineReceived += new LineReceive(OnLineReceived);
+                    }
+                    Thread.Sleep(100); // Pequeña espera para reducir CPU
+                }
+            }
+            catch (SocketException ex)
+            {
+                Ejecutor.m_log.AgregaRegistro("Error en el listener: " + ex.Message);
+            }
 
-            //    Console.WriteLine(ex.Message);
-            //}
         }
 
         private void OnLineReceived(UserConnection sender, String data)
@@ -92,8 +95,13 @@ namespace DemonioPAB
 
             try
             {
-                DateTime inicia = DateTime.Now;
-                listenerThread.Abort();
+                cts.Cancel(); // Indica que se debe detener el listener
+
+                if (listener != null)
+                {
+                    listener.Stop();
+                    listener = null;
+                }
 
                 return true;
             }
@@ -101,13 +109,11 @@ namespace DemonioPAB
             {
                 if (Ejecutor.escribeLOG)
                 {
-                    Ejecutor.m_log.AgregaRegistro("Message: " + ex.Message);
-                    Ejecutor.m_log.AgregaRegistro("InnerException: " + ex.InnerException);
-                    Ejecutor.m_log.AgregaRegistro("StackTrace: " + ex.StackTrace);
+                    Ejecutor.m_log.AgregaRegistro("Error al detener el servidor: " + ex.Message);
                 }
-                                
                 return false;
             }
         }
+
     }
 }
